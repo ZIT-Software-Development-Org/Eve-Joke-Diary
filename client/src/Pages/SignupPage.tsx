@@ -1,69 +1,50 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-function Signup() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+const SignupPage = () => {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSignup = (e) => {
     e.preventDefault();
-
-    // Log user information to the console
-    console.log("User Information:", {
-      name: name,
-      email: email,
-      password: password,
-    });
-
-    // Reset the form fields after submission
-    setName("");
-    setEmail("");
-    setPassword("");
+    console.log('Signup Info:', { username, email, password });
   };
 
   return (
-    <div className="Signup" style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
+    <div>
       <h2>Signup Page</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSignup}>
         <div>
-          <label htmlFor="name">Full Name:</label>
+          <label>Username:</label>
           <input
             type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
-            style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
           />
         </div>
         <div>
-          <label htmlFor="email">Email:</label>
+          <label>Email:</label>
           <input
             type="email"
-            id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label>Password:</label>
           <input
             type="password"
-            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
           />
         </div>
-        <button type="submit" style={{ width: "100%", padding: "10px", backgroundColor: "#0000FF", color: "white" }}>
-          Signup
-        </button>
+        <button type="submit">Signup</button>
       </form>
     </div>
   );
-}
+};
 
-export default Signup;
+export default SignupPage;

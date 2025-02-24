@@ -1,53 +1,51 @@
-import React, { useState } from "react";
+import React, { useState, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function App() {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+const LoginPage: React.FC = () => {
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLogin = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
-    console.log("User Information:", {
-      username: username,
-      password: password,
-    });
+    console.log('Login Info:', { email, password });
 
-    // Reset the form after submitting
-    setUsername("");
-    setPassword("");
+    // Clear the form
+    setEmail('');
+    setPassword('');
+    
   };
 
   return (
-    <div className="App" style={{ maxWidth: "400px", margin: "auto", padding: "20px" }}>
+    <div className="flex flex-col items-center justify-center h-screen">
       <h2>Login Page</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleLogin}>
         <div>
-          <label htmlFor="username">Username:</label>
+          <label>Email:</label>
           <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
           />
         </div>
         <div>
-          <label htmlFor="password">Password:</label>
+          <label>Password:</label>
           <input
             type="password"
-            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
-            style={{ width: "100%", padding: "8px", marginBottom: "10px" }}
           />
         </div>
-        <button type="submit" style={{ width: "100%", padding: "10px", backgroundColor: "#0000FF", color: "white" }}>
-          Login
-        </button>
+        <button type="submit">Login</button>
       </form>
+      <button
+          onClick={() => navigate('/signup')}>
+          Don't have an account? Sign Up
+        </button>
     </div>
   );
-}
+};
 
-export default App;
+export default LoginPage;
