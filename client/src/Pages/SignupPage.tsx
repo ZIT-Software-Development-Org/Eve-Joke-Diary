@@ -26,6 +26,8 @@ function SignupPage() {
     } catch (error) {
       console.error("Signup Error:", error);
       alert("Something went wrong. Please try again.");
+      //Clearing the form
+      setFormData({ username: "", email: "", password: "" });
     }
   };
 
