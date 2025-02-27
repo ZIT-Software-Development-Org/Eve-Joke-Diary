@@ -1,51 +1,52 @@
-import React, { useState, FormEvent } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LoginPage: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const navigate = useNavigate();
+function LoginPage() {
+  const navigate = useNavigate(); // Initialize navigation
 
-  const handleLogin = (e: FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    console.log('Login Info:', { email, password });
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
 
-    // Clear the form
-    setEmail('');
-    setPassword('');
-    
+  const handleChange = (e) => {
+    setFormData({ ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h2>Login Page</h2>
-      <form onSubmit={handleLogin}>
+    <div>
+      <h1>Login Page</h1>
+      <form>
         <div>
-          <label>Email:</label>
+          <label htmlFor="email">Email:</label>
           <input
             type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            id="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
           />
         </div>
         <div>
-          <label>Password:</label>
+          <label htmlFor="password">Password:</label>
           <input
             type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
+            name="password"
+            value={formData.password}
+            id="password"
+            onChange={handleChange}
           />
         </div>
         <button type="submit">Login</button>
       </form>
-      <button
-          onClick={() => navigate('/signup')}>
-          Don't have an account? Sign Up
-        </button>
+
+      <button onClick={() => navigate('/signup')}>
+        Don't have an account? Sign Up
+      </button>
     </div>
   );
-};
+}
 
 export default LoginPage;
